@@ -55,7 +55,6 @@ def back_to_normal(self):
 
 
 def paste_mode(type_, self, event, char):
-    print("paste mode")
     if event.state & X.ControlMask:
         # there are modifiers
         # eg. X.ControlMask

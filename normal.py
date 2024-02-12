@@ -12,7 +12,7 @@ pressed = set()
 
 # This is a list of received events that haven't been handled yet.
 # Only when the user releases a key, the script knows what it should do.
-# Then it either discards the preceding events, or replays them
+# Then it either discards the preceding events, or replays them.
 events = []
 
 
@@ -67,13 +67,7 @@ def normal_mode(self, event, char):
 
 
 def handle_single_key(self, ev):
-    if ev == "t":
-        # Vim mode
-        open_vim(self, compile_latex=False)
-    elif ev == "Shift+t":
-        # Vim mode prerendered
-        open_vim(self, compile_latex=True)
-    elif ev == "a":
+    if ev == "a":
         # Add objects mode
         self.mode = styles.object_mode
     elif ev == "Shift+a":
@@ -85,21 +79,30 @@ def handle_single_key(self, ev):
     elif ev == "Shift+s":
         # Save style mode
         styles.save_style_mode(self)
-    elif ev == "w":
+    elif ev == "d":
         # Pencil
         self.press("p")
-    elif ev == "x":
-        # Snap
-        self.press("percent", X.ShiftMask)
     elif ev == "f":
         # Bezier
         self.press("b")
+    elif ev == "t":
+        # Vim mode
+        open_vim(self, compile_latex=False)
+    elif ev == "Shift+t":
+        # Vim mode pre-rendered
+        open_vim(self, compile_latex=True)
+    elif ev == "v":
+        # Snap
+        self.press("percent", X.ShiftMask)
     elif ev == "z":
         # Undo
         self.press("z", X.ControlMask)
-    elif ev == "Shift+z":
+    elif ev == "x":
         # Delete
         self.press("Delete")
+    elif ev == "c":
+        # Redo
+        self.press("z", X.ControlMask | X.ShiftMask)
     elif ev == "`":
         # Disabled mode
         self.press("t")
@@ -207,7 +210,6 @@ def paste_style(self, combination):
     # Start creation of the svg.
     # Later on, we'll write this svg to the clipboard, and send Ctrl+Shift+V to
     # Inkscape, to paste this style.
-
     svg = """
           <?xml version="1.0" encoding="UTF-8" standalone="no"?>
           <svg>
