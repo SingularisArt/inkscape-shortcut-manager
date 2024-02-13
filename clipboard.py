@@ -24,6 +24,5 @@ def get(target=None):
         universal_newlines=True,
     )
 
-    # returncode = result.returncode
     stdout = result.stdout.strip()
     return stdout
