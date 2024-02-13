@@ -125,7 +125,7 @@ def paste_style(self, combination):
     style = {"stroke-opacity": 1}
 
     # Clean
-    if "t" in combination:
+    if "y" in combination:
         style["fill"] = "#ffffff"
         style["stroke"] = "#000000"
         style["stroke-width"] = w
@@ -167,6 +167,10 @@ def paste_style(self, combination):
 
     if "r" in combination:
         style["stroke"] = "#FFFFFF"
+
+    if "t" in combination:
+        style["stroke"] = "#000000"
+        style["stroke-opacity"] = 0.12
 
     # Sizes
     if "a" in combination:

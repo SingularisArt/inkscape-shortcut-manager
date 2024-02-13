@@ -3,7 +3,7 @@ import subprocess
 
 def copy(string, target=None):
     extra_args = []
-    if not target:
+    if target:
         extra_args += ["-target", target]
 
     return subprocess.run(
@@ -15,7 +15,7 @@ def copy(string, target=None):
 
 def get(target=None):
     extra_args = []
-    if not target:
+    if target:
         extra_args += ["-target", target]
 
     result = subprocess.run(
