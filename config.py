@@ -51,4 +51,4 @@ def import_file(name, path):
     return module
 
 
-CONFIG_PATH = Path("~/.config/inkscape-shortcut-manager").expanduser()
+CONFIG_PATH = Path("~/.config/lesson-manager").expanduser()

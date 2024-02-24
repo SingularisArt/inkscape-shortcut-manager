@@ -194,18 +194,21 @@ def paste_style(self, combination):
     if "h" in combination:
         style["stroke-dasharray"] = "none"
 
+    color = style.get("stroke", "#000000")
+    fill_opacity = style.get("stroke-opacity", 1.0)
+
     # Arrows
     if "z" in combination:
-        style["marker-start"] = f"url(#marker-arrow-{w})"
+        style["marker-start"] = f"url(#marker-arrow-{w}-{color}-{fill_opacity})"
         style["marker-end"] = "none"
 
     if "x" in combination:
-        style["marker-start"] = f"url(#marker-arrow-{w})"
-        style["marker-end"] = f"url(#marker-arrow-{w})"
+        style["marker-start"] = f"url(#marker-arrow-{w}-{color}-{fill_opacity})"
+        style["marker-end"] = f"url(#marker-arrow-{w}-{color}-{fill_opacity})"
 
     if "c" in combination:
         style["marker-start"] = "none"
-        style["marker-end"] = f"url(#marker-arrow-{w})"
+        style["marker-end"] = f"url(#marker-arrow-{w}-{color}-{fill_opacity})"
 
     if "v" in combination:
         style["marker-start"] = "none"
@@ -225,21 +228,23 @@ def paste_style(self, combination):
         "marker-start" in style and style["marker-start"] != "none"
     ):
         svg += f"""
-                <defs id="marker-defs">
-                <marker
-                id="marker-arrow-{w}"
-                orient="auto-start-reverse"
-                refY="0" refX="0"
-                markerHeight="1.690" markerWidth="0.911">
-                  <g transform="scale({(2.40 * w + 3.87)/(4.5*w)})">
-                    <path
-                       d="M -1.55415,2.0722 C -1.42464,1.29512 0,0.1295 0.38852,0 0,-0.1295 -1.42464,-1.29512 -1.55415,-2.0722"
-                       style="fill:none;stroke:#000000;stroke-width:{0.6};stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1"
-                       inkscape:connector-curvature="0" />
-                   </g>
-                </marker>
-                </defs>
-                """
+<defs id="marker-defs">
+    <marker
+        id="marker-arrow-{w}-{color}-{fill_opacity}"
+        orient="auto-start-reverse"
+        refY="0" refX="0"
+        markerHeight="1.690" markerWidth="0.911"
+    >
+        <g transform="scale({(2.40 * w + 3.87)/(4.5*w)})">
+            <path
+                d="M 1.99252,0 -1.19551,1.59401 0,0 -1.19551,-1.59401"
+                style="fill:{color};fill-opacity:{fill_opacity};fill-rule:nonzero;stroke:none;"
+            />
+        </g>
+    </marker>
+</defs>
+"""
+    print(svg)
 
     style_string = ";".join(
         "{}: {}".format(key, value)
