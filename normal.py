@@ -244,7 +244,6 @@ def paste_style(self, combination):
     </marker>
 </defs>
 """
-    print(svg)
 
     style_string = ";".join(
         "{}: {}".format(key, value)
