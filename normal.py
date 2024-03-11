@@ -67,7 +67,13 @@ def normal_mode(self, event, char):
 
 
 def handle_single_key(self, ev):
-    if ev == "a":
+    if ev == "q":
+        # Enter
+        self.press("Return")
+    elif ev == "w":
+        # Save
+        self.press("s", X.ControlMask)
+    elif ev == "a":
         # Add objects mode
         self.mode = styles.object_mode
     elif ev == "Shift+a":
@@ -126,7 +132,7 @@ def paste_style(self, combination):
 
     # Clean
     if "y" in combination:
-        style["fill"] = "#ffffff"
+        style["fill"] = "none"
         style["stroke"] = "#000000"
         style["stroke-width"] = w
         style["marker-end"] = "none"
@@ -154,6 +160,10 @@ def paste_style(self, combination):
     if "5" in combination:
         style["fill"] = "#000000"
         style["fill-opacity"] = 0.12
+
+    if "6" in combination:
+        style["fill"] = "none"
+        style["fill-opacity"] = 1
 
     # Stroke
     if "q" in combination:
